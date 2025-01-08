@@ -26,3 +26,26 @@ def pregunta_06():
      ('jjj', 5, 17)]
 
     """
+
+
+    datos = {}
+    with open('files/input/data.csv', 'r') as file:
+        for line in file:
+            columnas = line.strip().split('\t')
+            diccionario = columnas[4]
+            for item in diccionario.split(","):
+                clave, valor = item.split(":")
+                valor = int(valor)
+                if clave in datos:
+                    datos[clave].append(valor)
+                else:
+                    datos[clave] = [valor]
+            
+    resultado = []
+    for letra, valores in datos.items():
+        maximo = max(valores)
+        minimo = min(valores)
+        resultado.append((letra, minimo, maximo))
+
+    return sorted(resultado)
+    

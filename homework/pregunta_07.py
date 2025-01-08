@@ -25,3 +25,17 @@ def pregunta_07():
      (9, ['A', 'B', 'E', 'A', 'A', 'C'])]
 
     """
+
+    contador = {}
+ 
+    with open('files/input/data.csv', 'r') as file:
+        for line in file:
+            columnas = line.strip().split('\t')
+            letra = columnas[0]
+            valor = int(columnas[1])
+            if valor in contador:
+                contador[valor].append(letra)   
+            else:
+                contador[valor] = [letra]  
+                
+    return sorted([(letra, valor) for letra, valor in contador.items()])
